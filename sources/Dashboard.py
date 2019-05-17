@@ -7,5 +7,5 @@ class Dashboard(FloatLayout):
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
 
-        self.background = Image(source="../images.png")
+        self.background = Image(source="images/bg.png")
         self.add_widget(self.background)

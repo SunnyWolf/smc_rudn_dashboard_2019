@@ -29,4 +29,4 @@ if __name__ == "__main__":
             old_excepthook(exctype, value, traceback)
     sys.excepthook = app_excepthook
 
-    SMCDashboardApp.run()
+    SMCDashboardApp().run()
