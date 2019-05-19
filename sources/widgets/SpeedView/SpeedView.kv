@@ -1,6 +1,9 @@
+#:import sin math.sin
+#:import cos math.cos
+#:import pi math.pi
 <SpeedView@FloatingLayout>
     id: speedView_fl
-    canvas:
+    canvas.before:
         Color:
             rgb: root.color_blue
         Rectangle:
@@ -17,8 +20,8 @@
         Line:
             width: 2.0
             points:
-                [self.width / 2.0, self.height / 2.0 + min(self.width, self.height) / 2.5, \
-                self.width / 2.0 + min(self.width, self.height) / 2.5, self.height / 2.0 + min(self.width, self.height) / 2.5]
+                [self.center_x, self.center_y + min(self.size) / 2.5, \
+                self.center_x + min(self.size) / 2.5, self.center_y + min(self.size) / 2.5]
 
         Color:
             rgba: root.color_ellipse
@@ -26,5 +29,45 @@
             width: 15.0
             circle:
                 (self.center_x, self.center_y, \
-                min(self.width, self.height) / 2.5, 210, 270, 100)
+                min(self.size) / 2.5, 210, 270, 100)
             cap: 'square'
+    Label:
+        text: "0"
+        font_size: 25
+        text_size: dp(30), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(210*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(210*pi/180)]
+    Label:
+        text: "20"
+        font_size: 25
+        text_size: dp(30), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(240*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(240*pi/180)]
+    Label:
+        text: "40"
+        font_size: 25
+        text_size: dp(30), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(270*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(270*pi/180)]
+    Label:
+        text: "60"
+        font_size: 25
+        text_size: dp(30), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(300*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(300*pi/180)]
+    Label:
+        text: "90"
+        font_size: 25
+        text_size: dp(30), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(330*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(330*pi/180)]
+    Label:
+        text: "110"
+        font_size: 25
+        text_size: dp(60), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(360*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(360*pi/180)]
+    Label:
+        text: "130"
+        font_size: 25
+        text_size: dp(60), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(390*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(360*pi/180)]
+    Label:
+        text: "150"
+        font_size: 25
+        text_size: dp(60), dp(30)
+        pos: [ (min(self.size) / 2.5 + 50.0) * sin(420*pi/180), -(- min(self.size) / 2.5 - 50.0) * cos(360*pi/180)]
