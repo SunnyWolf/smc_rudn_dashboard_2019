@@ -1,6 +1,8 @@
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.image import Image
 
+from sources.widgets.SpeedView.SpeedView import SpeedView
+
 
 # основной экран
 class Dashboard(FloatLayout):
@@ -9,3 +11,6 @@ class Dashboard(FloatLayout):
 
         self.background = Image(source="images/bg.png")
         self.add_widget(self.background)
+
+        self.speed_view = SpeedView()
+        self.add_widget(self.speed_view)

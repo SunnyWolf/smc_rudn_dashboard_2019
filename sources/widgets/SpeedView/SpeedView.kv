@@ -1,0 +1,30 @@
+<SpeedView@FloatingLayout>
+    id: speedView_fl
+    canvas:
+        Color:
+            rgb: root.color_blue
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+        Color:
+            rgba: root.color_ellipse_static
+        Line:
+            width: 2.0
+            circle:
+                (self.center_x, self.center_y, \
+                min(self.width, self.height) / 2.5, 210, 360, 100)
+        Line:
+            width: 2.0
+            points:
+                [self.width / 2.0, self.height / 2.0 + min(self.width, self.height) / 2.5, \
+                self.width / 2.0 + min(self.width, self.height) / 2.5, self.height / 2.0 + min(self.width, self.height) / 2.5]
+
+        Color:
+            rgba: root.color_ellipse
+        Line:
+            width: 15.0
+            circle:
+                (self.center_x, self.center_y, \
+                min(self.width, self.height) / 2.5, 210, 270, 100)
+            cap: 'square'
