@@ -1,6 +1,3 @@
-from threading import Thread
-import time
-import datetime
 import sys
 
 from kivy.app import App
@@ -11,10 +8,10 @@ from sources.Dashboard import Dashboard
 # os.environ['KIVY_WINDOW'] = 'egl_rpi'
 
 
-# Основной класс приложения
+# Main application class
 class SMCDashboardApp(App):
     def build(self):
-        # основная страница
+        # Main page
         dashboard = Dashboard()
         return dashboard
 
