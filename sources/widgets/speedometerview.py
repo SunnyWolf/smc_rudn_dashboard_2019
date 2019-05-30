@@ -9,15 +9,15 @@ speedometerview_layout = '''
             size: min(self.size), min(self.size)
             source: 'images/SpeedView.png'
             pos:
-                self.width / 2 + min(self.size) / 2 + (self.width - min(self.size)),\
-                self.height / 2 - min(self.size) / 2
+                self.pos[0] + (self.width - min(self.size)) / 2,\
+                self.pos[1] + (self.height - min(self.size)) / 2
                 
         Ellipse:
             size: min(self.size), min(self.size)
             source: 'images/SpeedView_BatteryGreen.png'
             pos:
-                self.width / 2 + min(self.size) / 2 + (self.width - min(self.size)),\
-                self.height / 2 - min(self.size) / 2
+                self.pos[0] + (self.width - min(self.size)) / 2,\
+                self.pos[1] + (self.height - min(self.size)) / 2
             angle_start: -150
             angle_end: -150 - (210 - 150) * self.bt_val
             
@@ -25,8 +25,8 @@ speedometerview_layout = '''
             size: min(self.size), min(self.size)
             source: 'images/SpeedView_BatteryRed.png' if self.bt_val < 0.20 else 'images/SpeedView_BatteryGreen.png'
             pos:
-                self.width / 2 + min(self.size) / 2 + (self.width - min(self.size)),\
-                self.height / 2 - min(self.size) / 2
+                self.pos[0] + (self.width - min(self.size)) / 2,\
+                self.pos[1] + (self.height - min(self.size)) / 2
             angle_start: -150
             angle_end: -150 - (210 - 150) * self.bt_val
 
@@ -39,8 +39,8 @@ speedometerview_layout = '''
             size: min(self.size), min(self.size)
             source: 'images/SpeedView_SpeedBlur.png'
             pos: 
-                self.width / 2 + min(self.size) / 2 + (self.width - min(self.size)),\
-                self.height / 2 - min(self.size) / 2
+                self.pos[0] + (self.width - min(self.size)) / 2,\
+                self.pos[1] + (self.height - min(self.size)) / 2
             angle_start: -2 - self.sp_ang_wide * self.sp_val / self.sp_val_max
             angle_end: 0
         PopMatrix
@@ -51,7 +51,6 @@ speedometerview_layout = '''
         # Rectangle
         #     size: self.size
         #     pos: self.pos
-
 '''
 Builder.load_string(speedometerview_layout)
 
@@ -65,10 +64,10 @@ class SpeedometerView(FloatLayout):
     sp_val = NumericProperty(0.0)
     bt_val = NumericProperty(0.0)
 
-    def set_speed_value(self, instance, value):
+    def set_speed_value(self, value):
         self.sp_val = value
 
-    def set_battery_percent(self, instance, value):
+    def set_battery_percent(self, value):
         self.bt_val = value
 
     def __init__(self, **kwargs):
