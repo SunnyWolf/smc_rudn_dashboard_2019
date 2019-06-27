@@ -10,7 +10,7 @@ class ModePopup(Popup):
     callback = None
 
     def on_eco(self, obj):
-        if self.callback != None:
+        if self.callback:
             try:
                 self.callback(0)
             except RuntimeError:
@@ -18,7 +18,7 @@ class ModePopup(Popup):
         self.dismiss()
 
     def on_standard(self, obj):
-        if self.callback != None:
+        if self.callback:
             try:
                 self.callback(1)
             except RuntimeError:
@@ -26,7 +26,7 @@ class ModePopup(Popup):
         self.dismiss()
 
     def on_track(self, obj):
-        if self.callback != None:
+        if self.callback:
             try:
                 self.callback(2)
             except RuntimeError:
@@ -61,6 +61,9 @@ class ModePopup(Popup):
 class ModeView(AnchorLayout):
     mode_button = None
 
+    def on_mode_changed(self, mode):
+        pass
+
     def callback(self, mode):
         if mode == 0:
             self.mode_button.source = 'images/Mode_ECO.png'
@@ -72,8 +75,7 @@ class ModeView(AnchorLayout):
     def __init__(self, **kwargs):
         super(ModeView, self).__init__(**kwargs)
 
-        self.mode_button = ImageButton(source='images/Mode_Standard.png')
-        # self.mode_button.
+        self.mode_button = ImageButton(source='images/Mode_Standard.png', size_hint=(0.6, 0.6))
 
         self.mode_button.bind(on_press=self.on_select)
 
