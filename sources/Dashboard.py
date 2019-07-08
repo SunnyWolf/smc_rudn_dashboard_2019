@@ -43,6 +43,7 @@ dashboard_layout = '''
                         id: light
                     Widget
                         size_hint: 1, 0.3
+                        
 '''
 Builder.load_string(dashboard_layout)
 
