@@ -45,16 +45,10 @@ Builder.load_string(dashboard_layout)
 
 # Main screen
 class Dashboard(BoxLayout):
-    # def set_speed(self, instance, value):
-    #     self.ids.speed.set_speed_value(value)
-    #
-    # def set_current(self, instance, value):
-    #     self.ids.current.set_current_value(value)
+    def test(self, obj):
+        self.ids.light.value = not self.ids.light.value
+        pass
 
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
-
-        # self.ids.sl1.bind(value=self.set_speed)
-        # self.ids.sl2.bind(value=self.set_current)
-
 
