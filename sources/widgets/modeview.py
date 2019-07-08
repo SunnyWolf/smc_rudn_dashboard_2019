@@ -75,7 +75,7 @@ class ModeView(AnchorLayout):
     def __init__(self, **kwargs):
         super(ModeView, self).__init__(**kwargs)
 
-        self.mode_button = ImageButton(source='images/Mode_Standard.png', size_hint=(0.6, 0.6))
+        self.mode_button = ImageButton(source='images/Mode_Standard.png')
 
         self.mode_button.bind(on_press=self.on_select)
 

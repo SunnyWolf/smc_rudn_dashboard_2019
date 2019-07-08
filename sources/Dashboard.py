@@ -34,11 +34,15 @@ dashboard_layout = '''
                 anchor_y: 'center'
                 BoxLayout:
                     orientation: 'vertical'
-                    size_hint: 0.2, 0.6
+                    size_hint: 1, 1
+                    Widget
+                        size_hint: 1, 1
                     ModeView:
                         id: mode
                     IndicatorLight:
                         id: light
+                    Widget
+                        size_hint: 1, 0.3
 '''
 Builder.load_string(dashboard_layout)
 
