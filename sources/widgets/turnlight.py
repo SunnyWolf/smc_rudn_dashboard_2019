@@ -8,6 +8,7 @@ turnlight_layout = '''
     canvas:
     direction: 'left'
     source: 'images/TurnLight_Left.png' if root.direction == 'left' else 'images/TurnLight_Right.png'
+    opacity: 0.0
 '''
 
 Builder.load_string(turnlight_layout)
@@ -23,6 +24,7 @@ class TurnLight(Image):
         self.anim.start(self)
 
     def off(self):
-        self.anim.stop(self)
+        if self.anim is not None:
+            self.anim.stop(self)
         self.opacity = 0.0
 
