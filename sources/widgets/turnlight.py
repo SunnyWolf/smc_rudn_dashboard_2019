@@ -15,16 +15,20 @@ Builder.load_string(turnlight_layout)
 
 
 class TurnLight(Image):
+    anim = None
+
     def __init__(self, **kwargs):
         super(TurnLight, self).__init__(**kwargs)
 
+    def on(self):
         self.anim = Animation(opacity=1.0, d=0.5) + Animation(opacity=0.0, d=0.5)
         self.anim.repeat = True
-
-    def on(self):
         self.anim.start(self)
 
     def off(self):
-        self.anim.stop(self)
-        self.opacity = 0.0
+        if self.anim is not None:
+            self.anim.stop(self)
+            self.anim = None
+            self.opacity = 0.0
+
 
