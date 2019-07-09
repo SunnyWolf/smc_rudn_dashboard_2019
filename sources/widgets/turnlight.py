@@ -20,8 +20,6 @@ class TurnLight(Image):
         self.anim = Animation(opacity=1.0, d=0.5) + Animation(opacity=0.0, d=0.5)
         self.anim.repeat = True
 
-        self.anim.start(self)
-
     def on(self, value):
         self.anim.start(self)
 
