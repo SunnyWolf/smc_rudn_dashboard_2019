@@ -1,21 +1,41 @@
 from kivy.lang import Builder
-from kivy.uix.image import Image
+from kivy.uix.anchorlayout import AnchorLayout
+from threading import Timer
+
+from kivy.properties import NumericProperty
 
 indicatorlight_layout = '''
 <IndicatorLight>:
-    value: False
-    source: 'images/Light_Close.png' if root.value == False else 'images/Light_Far.png'
+    Image:
+        id: side
+        source: 'images/Light_Side.png'
+        opacity: 1.0 if root.value == 1 else 0.0
+    Image:
+        id: close
+        source: 'images/Light_Close.png'
+        opacity: 1.0 if root.value == 2 else 0.0
+    Image:
+        id: far
+        source: 'images/Light_Far.png'
+        opacity: 1.0 if root.value == 3 else 0.0
 '''
 
 Builder.load_string(indicatorlight_layout)
 
 
-class IndicatorLight(Image):
+class IndicatorLight(AnchorLayout):
+    anchor_x = 'center'
+    anchor_y = 'center'
+
+    OFF = 0
+    SIDE = 1
+    CLOSE = 2
+    FAR = 3
+
+    value = NumericProperty(0)
+
     def __init__(self, **kwargs):
         super(IndicatorLight, self).__init__(**kwargs)
 
-    def far(self):
-        self.value = True
-
-    def close(self):
-        self.value = False
+    def set(self, value):
+        self.value = value
