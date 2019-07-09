@@ -29,6 +29,6 @@ class TurnLight(Image):
         if self.anim is not None:
             self.anim.stop(self)
             self.anim = None
-            self.opacity = 0.0
+            self.opacity = 1.0
 
 
