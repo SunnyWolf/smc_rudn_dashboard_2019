@@ -11,41 +11,37 @@ dashboard_layout = '''
 #:import TurnLight sources.widgets.turnlight
 
 <Dashboard>
-    BoxLayout:
-        orientation: 'vertical'
-        # Slider:
-        #     id: sl1
-        #     size_hint: 1., 0.1
-        #     max: 160
-        #     min: 0
-        # Slider:
-        #     id: sl2
-        #     size_hint: 1., 0.1
-        #     max: 60
-        #     min: -120
-        FloatLayout:
-            BoxLayout
-                orientation: 'horizontal'
-                SpeedometerView:
-                    id: speed
-                CurrentView:
-                    id: current
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'center'
-                BoxLayout:
-                    orientation: 'vertical'
+    FloatLayout:
+        BoxLayout
+            orientation: 'horizontal'
+            SpeedometerView:
+                id: speed
+            CurrentView:
+                id: current
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 1
+                Widget
                     size_hint: 1, 1
-                    Widget
-                        size_hint: 1, 1
-                    ModeView:
-                        id: mode
-                    IndicatorLight:
-                        id: light
-                    Widget
-                        size_hint: 1, 0.3
+                ModeView:
+                    id: mode
+                IndicatorLight:
+                    id: light
+                Widget
+                    size_hint: 1, 0.3
+
+        BoxLayout
+            orientation: 'horizontal'
             TurnLight:
                 id: tl_left
+                direction: 'left'
+            Widget
+            TurnLight:
+                id: tl_right
+                direction: 'right'
                         
 '''
 Builder.load_string(dashboard_layout)
