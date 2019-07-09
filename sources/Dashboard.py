@@ -8,6 +8,7 @@ dashboard_layout = '''
 #:import CurrentView sources.widgets.currentview
 #:import IndicatorLight sources.widgets.indicatorlight
 #:import ModeView sources.widgets.modeview
+#:import TurnLight sources.widgets.turnlight
 
 <Dashboard>
     BoxLayout:
@@ -43,6 +44,8 @@ dashboard_layout = '''
                         id: light
                     Widget
                         size_hint: 1, 0.3
+            TurnLight:
+                id: tl_left
                         
 '''
 Builder.load_string(dashboard_layout)

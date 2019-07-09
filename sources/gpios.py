@@ -18,6 +18,25 @@ class Gpios:
     def on_light_off(self):
         self.indicator_light.set(IndicatorLight.OFF)
 
+    def turn_alarm(self):
+        pass
+
+    def turn_left(self):
+        pass
+
+    def turn_right(self):
+        pass
+
+    def turn_off(self):
+        self.tl_left.off()
+        pass
+
+    def on_turn_light(self):
+        self.turn_off()
+        if self.b_turn_left.value == 1:
+            self.tl_left.on()
+            pass
+
     def on_changing(self):
         if self.b_light_side.value == 1:
             if self.b_light_far.value == 1:
@@ -31,17 +50,25 @@ class Gpios:
 
     def __init__(self, dashboard):
         self.indicator_light = dashboard.ids.light
+        self.tl_left = dashboard.ids.tl_left
 
-        self.b_light_side = Button(26, pull_up=None, active_state=True, bounce_time=0.1)
+        self.b_light_side = Button(26, pull_up=None, active_state=True)
         self.b_light_side.when_pressed = self.on_changing
         self.b_light_side.when_released = self.on_changing
 
-        self.b_light_close = Button(12, pull_up=None, active_state=True, bounce_time=0.1)
+        self.b_light_close = Button(12, pull_up=None, active_state=True)
         self.b_light_close.when_activated = self.on_changing
         self.b_light_close.when_released = self.on_changing
 
-        self.b_light_far = Button(16, pull_up=None, active_state=True, bounce_time=0.1)
+        self.b_light_far = Button(16, pull_up=None, active_state=True)
         self.b_light_far.when_activated = self.on_changing
         self.b_light_far.when_released = self.on_changing
 
+        self.b_turn_left = Button(19, pull_up=None, active_state=True)
+        self.b_turn_left.when_pressed = self.on_turn_light
+        self.b_turn_left.when_released = self.on_turn_light
+
+        self.b_turn_right = Button(20, pull_up=None, active_state=True)
+        self.b_turn_right.when_pressed = self.on_turn_light
+        self.b_turn_right.when_released = self.on_turn_light
         # self.fan = PWMOutputDevice()
