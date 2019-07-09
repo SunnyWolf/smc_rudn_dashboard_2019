@@ -27,8 +27,6 @@ class TurnLight(Image):
 
     def off(self):
         if self.anim is not None:
-            self.anim.stop(self)
-            self.anim = None
-            self.opacity = 1.0
+            self.anim.repeat = False
 
 
