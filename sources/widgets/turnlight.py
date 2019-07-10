@@ -19,8 +19,6 @@ class TurnLight(Image):
     def __init__(self, **kwargs):
         super(TurnLight, self).__init__(**kwargs)
 
-        self.on()
-
     def on(self):
         if self.anim is None:
             self.anim = Animation(opacity=1.0, d=0.5) + Animation(opacity=0.0, d=0.5)
@@ -31,5 +29,3 @@ class TurnLight(Image):
         if self.anim is not None:
             self.anim.repeat = False
             self.anim = None
-
-
