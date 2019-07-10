@@ -1,6 +1,5 @@
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.relativelayout import RelativeLayout
-
+from kivy.animation import Animation
 from kivy.lang import Builder
 
 dashboard_layout = '''
@@ -42,6 +41,10 @@ dashboard_layout = '''
             TurnLight:
                 id: tl_right
                 direction: 'right'
+        
+        Image:
+            id: logo
+            source: 'images/Logo_RUDN.png'
                         
 '''
 Builder.load_string(dashboard_layout)
@@ -49,10 +52,10 @@ Builder.load_string(dashboard_layout)
 
 # Main screen
 class Dashboard(BoxLayout):
-    def test(self, obj):
-        self.ids.light.value = not self.ids.light.value
-        pass
-
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
 
+        logo = self.ids.logo
+
+        anim = Animation(opacity=1.0, d=1) + Animation(opacity=0.0, d=1.5)
+        anim.start(logo)

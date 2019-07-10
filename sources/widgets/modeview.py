@@ -82,6 +82,6 @@ class ModeView(AnchorLayout):
         self.add_widget(self.mode_button)
 
     def on_select(self, a):
-        window = ModePopup(size_hint=(0.4, 0.3))
+        window = ModePopup(size_hint=(0.6, 0.5))
         window.set_callback(self.callback)
         window.open()
