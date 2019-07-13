@@ -55,7 +55,12 @@ class Dashboard(BoxLayout):
     def __init__(self, **kwargs):
         super(Dashboard, self).__init__(**kwargs)
 
-        logo = self.ids.logo
+        self.speed = self.ids.speed
+        self.current = self.ids.current
+        self.light = self.ids.light
+        self.tl_left = self.ids.tl_left
+        self.tl_right = self.ids.tl_right
 
+        logo = self.ids.logo
         anim = Animation(opacity=1.0, d=1) + Animation(opacity=0.0, d=1.5)
         anim.start(logo)

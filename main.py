@@ -1,10 +1,11 @@
 import sys
 
 from kivy.app import App
-
 from sources.Dashboard import Dashboard
 from sources.utils import is_raspberry_pi
 from sources.gpios import Gpios
+from sources.can.canlistener import CanListener
+import can
 
 # os.environ['KIVY_GL_BACKEND'] = 'gl'
 # os.environ['KIVY_WINDOW'] = 'egl_rpi'
@@ -17,9 +18,13 @@ class SMCDashboardApp(App):
         dashboard = Dashboard()
 
         if is_raspberry_pi():
-            print('OK')
-            gpios = Gpios(dashboard)
+            print('Detected Raspberry Pi. Configuring interfaces')
 
+            gpios = Gpios(dashboard)
+            listener = CanListener(dashboard)
+
+            bus = can.interface.Bus(channel='can0', bustype='socketcan')
+            can.Notifier(bus, [listener])
         return dashboard
 
 

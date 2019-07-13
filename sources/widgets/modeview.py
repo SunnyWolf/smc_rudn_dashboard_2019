@@ -3,6 +3,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from sources.widgets.imagebutton import ImageButton
 
+from kivy.uix.image import Image
+
 from exceptions import RuntimeError
 
 
@@ -61,16 +63,24 @@ class ModePopup(Popup):
 class ModeView(AnchorLayout):
     mode_button = None
 
+    emilio_counter = 0
+
     def on_mode_changed(self, mode):
         pass
 
     def callback(self, mode):
         if mode == 0:
             self.mode_button.source = 'images/Mode_ECO.png'
+            self.emilio_counter += 1
+            if self.emilio_counter == 3:
+                popup = Popup(title='seriously?', content=Image(source='images/emilio.png'), size_hint=(0.3, 0.5))
+                popup.open()
         if mode == 1:
             self.mode_button.source = 'images/Mode_Standard.png'
+            self.emilio_counter = 0
         if mode == 2:
             self.mode_button.source = 'images/Mode_Track.png'
+            self.emilio_counter = 0
 
     def __init__(self, **kwargs):
         super(ModeView, self).__init__(**kwargs)
