@@ -2,6 +2,10 @@ import sys
 
 from kivy.app import App
 from sources.Dashboard import Dashboard
+from kivy.uix.screenmanager import ScreenManager, SlideTransition
+from sources.mainscreen import MainScreen
+from sources.flagsscreen import FlagsScreen
+from sources.consolescreen import ConsoleScreen
 from sources.utils import is_raspberry_pi
 from sources.gpios import Gpios
 from sources.can.canlistener import CanListener
@@ -15,17 +19,26 @@ import can
 class SMCDashboardApp(App):
     def build(self):
         # Main page
-        dashboard = Dashboard()
+        # dashboard = Dashboard()
 
-        if is_raspberry_pi():
-            print('Detected Raspberry Pi. Configuring interfaces')
+        manager = ScreenManager(transition=SlideTransition())
+        mainscreen = MainScreen(name='main')
+        flagsscreen = FlagsScreen(name='flags')
+        consolescreen = ConsoleScreen(name='console')
 
-            gpios = Gpios(dashboard)
-            listener = CanListener(dashboard)
+        manager.add_widget(mainscreen)
+        manager.add_widget(flagsscreen)
+        manager.add_widget(consolescreen)
 
-            bus = can.interface.Bus(channel='can0', bustype='socketcan')
-            can.Notifier(bus, [listener])
-        return dashboard
+        # if is_raspberry_pi():
+        #     print('Detected Raspberry Pi. Configuring interfaces')
+        #
+        #     gpios = Gpios(dashboard)
+        #     listener = CanListener(dashboard)
+        #
+        #     bus = can.interface.Bus(channel='can0', bustype='socketcan')
+        #     can.Notifier(bus, [listener])
+        return manager
 
 
 if __name__ == "__main__":
