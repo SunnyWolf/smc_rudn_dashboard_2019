@@ -18,15 +18,6 @@ class Gpios:
     def on_light_off(self):
         self.dashboard.indicator_light.set(IndicatorLight.OFF)
 
-    def turn_alarm(self):
-        pass
-
-    def turn_left(self):
-        pass
-
-    def turn_right(self):
-        pass
-
     def turn_off(self):
         self.dashboard.tl_left.off()
         self.dashboard.tl_right.off()
@@ -49,9 +40,24 @@ class Gpios:
                 self.on_light_side()
         else:
             self.on_light_off()
+        pass
+
+    def on_foot_step(self):
+        if self.b_foot_step.value == 1:
+            self.dashboard.indicator_footstep.opacity = 1.0
+        else:
+            self.dashboard.indicator_footstep.opacity = 0.0
+        pass
 
     def __init__(self, dashboard):
         self.dashboard = dashboard
+
+        # 26 - side lights
+        # 21 - foot step
+        # 20 - turn light
+        # 19 - turn_light
+        # 16 - far light
+        # 12 - close light
 
         self.b_light_side = Button(26, pull_up=None, active_state=True)
         self.b_light_side.when_pressed = self.on_changing
@@ -72,4 +78,9 @@ class Gpios:
         self.b_turn_right = Button(20, pull_up=None, active_state=True)
         self.b_turn_right.when_pressed = self.on_turn_light
         self.b_turn_right.when_released = self.on_turn_light
+
+        self.b_foot_step = Button(21, pull_up=None, active_state=True)
+        self.b_foot_step.when_pressed = self.on_foot_step
+        self.b_foot_step.when_released = self.on_foot_step
+
         # self.fan = PWMOutputDevice()

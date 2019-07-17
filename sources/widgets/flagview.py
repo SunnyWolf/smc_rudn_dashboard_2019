@@ -21,7 +21,7 @@ flagview_layout = '''
     BoxLayout:
         orientation: 'vertical'
         Label:
-            font_size: 20
+            font_size: 40
             text: root.name
         Label:
             font_size: 20
@@ -33,15 +33,21 @@ flagview_layout = '''
     on_corners: self.compute_points()
     on_resolution: self.compute_points()
     canvas:
+        Color:
+            rgba: 0,1,0,0.5
+        Mesh:
+            mode: 'triangle_fan'
+            vertices: self.vertices
+            indices: self.indices
+        Color:
+            None    
         Line:
             # we don't care about the arguments, pass them to get
             # binding
             points: self.points
             width: self.line_width
             close: True
-        # Mesh:
-        #     vertices: self.vertices
-        #     indices: self.indices
+
 '''
 
 
@@ -61,14 +67,16 @@ class FlagView(AnchorLayout):
 class RoundedBox(Widget):
     corners = ListProperty([0, 0, 0, 0])
     line_width = NumericProperty(1)
-    resolution = NumericProperty(100)
+    resolution = NumericProperty(50)
     points = ListProperty([])
     padding = NumericProperty(0)
-    # vertices = ListProperty([[0,0,0,0],[0,0,0,0]])
-    indices = NumericProperty(0)
+    vertices = ListProperty([])
+    indices = ListProperty([])
 
     def compute_points(self, *args):
         self.points = []
+        self.vertices = []
+        self.indices = []
 
         a = - pi
 
@@ -109,6 +117,17 @@ class RoundedBox(Widget):
                 ])
 
         self.points.extend(self.points[:2])
+
+        i = 0
+        while i < len(self.points)-1:
+            point_x = self.points[i]
+            point_y = self.points[i+1]
+            self.vertices.extend([self.x + point_x, self.y + point_y, 0, 0])
+            self.indices.append(i/2)
+            i = i + 2
+            pass
+        pass
+        print self.pos
 
 
 Builder.load_string(flagview_layout)

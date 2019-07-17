@@ -22,5 +22,6 @@ class Dashboard(ScreenManager):
         self.tl_right = self.mainscreen.ids.tl_right
         self.indicator_speed = self.mainscreen.ids.speed
         self.indicator_current = self.mainscreen.ids.current
+        self.indicator_footstep = self.mainscreen.ids.footstep
 
 

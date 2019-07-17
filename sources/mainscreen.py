@@ -46,8 +46,13 @@ mainscreen_layout = '''
                         id: mode
                     IndicatorLight:
                         id: light
-                    Widget
-                        size_hint: 1, 0.3
+                    Label:
+                        id: footstep
+                        text: 'FOOTSTEP'
+                        font: 'fonts/SysBoldItalic.ttf'
+                        font_size: 40
+                        color: 1,0,0,1
+                        opacity: 0.0
     
             BoxLayout
                 orientation: 'horizontal'
