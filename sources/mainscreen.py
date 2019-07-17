@@ -9,8 +9,9 @@ mainscreen_layout = '''
 #:import ModeView sources.widgets.modeview
 #:import TurnLight sources.widgets.turnlight
 
+
 <MainScreen>:
-    name: 'Dashboard'
+    name: 'Dashboard' 
     BoxLayout:
         orientation: 'vertical'
         BoxLayout:

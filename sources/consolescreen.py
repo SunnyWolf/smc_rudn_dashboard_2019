@@ -10,6 +10,7 @@ consolescreen_layout = '''
         Button:
             size_hint: 1.0, 0.1
             text: 'DASHBOARD'
+            font_size: 30
             on_release: app.root.current = 'main'
         ScrollView:
             id: scroll_view

@@ -1,28 +1,31 @@
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
-from kivy.properties import ListProperty, NumericProperty
+from kivy.properties import ListProperty, NumericProperty, StringProperty, BooleanProperty
 
 from math import sin, cos, pi
 
 flagview_layout = '''
 <FlagView>:
-    text: 'test'
-    canvas:
-        Color:
-            rgba: 1,1,1,0.2
-        RoundedRectangle:
-            size: root.size
-            pos: root.pos
-            radius: 30,
-        Color:
-            rgba: 1,1,1,0.3
-        Line:
-            width: 3
-            rectangle: self.x, self.y, self.width, self.height
-    Label:
-        font_size: 20
-        text: root.text
+    name: ''
+    text: ''
+    description: ''
+    value: False
+    
+    RoundedBox:
+        size: root.size
+        pos: root.pos
+        corners: 20, 20, 20, 20
+        padding: 10
+        line_width: 3
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            font_size: 20
+            text: root.name
+        Label:
+            font_size: 20
+            text: root.text
 
 <RoundedBox>:
     on_pos: self.compute_points()
@@ -35,13 +38,21 @@ flagview_layout = '''
             # binding
             points: self.points
             width: self.line_width
-            #loop: True
+            close: True
+        # Mesh:
+        #     vertices: self.vertices
+        #     indices: self.indices
 '''
 
 
 class FlagView(AnchorLayout):
     anchor_x = 'center'
     anchor_y = 'center'
+
+    name = StringProperty('')
+    text = StringProperty('')
+    description = StringProperty('')
+    value = BooleanProperty(False)
 
     def __init__(self, **kwargs):
         super(FlagView, self).__init__(**kwargs)
@@ -53,6 +64,8 @@ class RoundedBox(Widget):
     resolution = NumericProperty(100)
     points = ListProperty([])
     padding = NumericProperty(0)
+    # vertices = ListProperty([[0,0,0,0],[0,0,0,0]])
+    indices = NumericProperty(0)
 
     def compute_points(self, *args):
         self.points = []
@@ -69,7 +82,7 @@ class RoundedBox(Widget):
                 ])
 
         x = self.right - self.corners[1] - self.padding
-        y = self.y + self.corners[1] - self.padding
+        y = self.y + self.corners[1] + self.padding
         while a < 0:
             a += pi / self.resolution
             self.points.extend([
@@ -86,7 +99,7 @@ class RoundedBox(Widget):
                 y + sin(a) * self.corners[2]
                 ])
 
-        x = self.x + self.corners[3] - self.padding
+        x = self.x + self.corners[3] + self.padding
         y = self.top - self.corners[3] - self.padding
         while a < pi:
             a += pi / self.resolution

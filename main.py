@@ -2,14 +2,8 @@ import sys
 
 from kivy.app import App
 from sources.Dashboard import Dashboard
-from kivy.uix.screenmanager import ScreenManager, SlideTransition
-from sources.mainscreen import MainScreen
-from sources.flagsscreen import FlagsScreen
-from sources.consolescreen import ConsoleScreen
+
 from sources.utils import is_raspberry_pi
-from sources.gpios import Gpios
-from sources.can.canlistener import CanListener
-import can
 
 # os.environ['KIVY_GL_BACKEND'] = 'gl'
 # os.environ['KIVY_WINDOW'] = 'egl_rpi'
@@ -17,28 +11,27 @@ import can
 
 # Main application class
 class SMCDashboardApp(App):
+    canbus = None
+    gpios = None
+    canlistener = None
+
+    def __init__(self, **kwargs):
+        super(SMCDashboardApp, self).__init__(**kwargs)
+        self.dashboard = Dashboard()
+
     def build(self):
-        # Main page
-        # dashboard = Dashboard()
+        if is_raspberry_pi():
+            print('Detected Raspberry Pi. Configuring interfaces')
 
-        manager = ScreenManager(transition=SlideTransition())
-        mainscreen = MainScreen(name='main')
-        flagsscreen = FlagsScreen(name='flags')
-        consolescreen = ConsoleScreen(name='console')
+            from sources.gpios import Gpios
+            # from sources.can.canlistener import CanListener
+            # import can
 
-        manager.add_widget(mainscreen)
-        manager.add_widget(flagsscreen)
-        manager.add_widget(consolescreen)
-
-        # if is_raspberry_pi():
-        #     print('Detected Raspberry Pi. Configuring interfaces')
-        #
-        #     gpios = Gpios(dashboard)
-        #     listener = CanListener(dashboard)
-        #
-        #     bus = can.interface.Bus(channel='can0', bustype='socketcan')
-        #     can.Notifier(bus, [listener])
-        return manager
+            self.gpios = Gpios(self.dashboard)
+            # self.canlistener = CanListener(self.dashboard)
+            # self.canbus = can.interface.Bus(channel='can0', bustype='socketcan')
+            # can.Notifier(self.canbus, [self.canlistener])
+        return self.dashboard
 
 
 if __name__ == "__main__":
