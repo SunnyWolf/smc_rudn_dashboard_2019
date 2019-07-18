@@ -5,8 +5,6 @@ from sources.widgets.imagebutton import ImageButton
 
 from kivy.uix.image import Image
 
-from exceptions import RuntimeError
-
 
 class ModePopup(Popup):
     callback = None
