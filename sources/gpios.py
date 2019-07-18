@@ -49,6 +49,11 @@ class Gpios:
             self.dashboard.indicator_footstep.opacity = 0.0
         pass
 
+    def update_all(self):
+        self.on_foot_step()
+        self.on_turn_light()
+        self.on_changing()
+
     def __init__(self, dashboard):
         self.dashboard = dashboard
 

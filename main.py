@@ -28,6 +28,7 @@ class SMCDashboardApp(App):
             # import can
 
             self.gpios = Gpios(self.dashboard)
+            self.gpios.update_all()
             # self.canlistener = CanListener(self.dashboard)
             # self.canbus = can.interface.Bus(channel='can0', bustype='socketcan')
             # can.Notifier(self.canbus, [self.canlistener])

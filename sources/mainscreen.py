@@ -25,8 +25,8 @@ mainscreen_layout = '''
                 text: 'BATTERY'
             Button:
                 font_size: 30
-                text: 'CONSOLE'
-                on_release: app.root.current = 'console'
+                text: 'MAP'
+                on_release: app.root.current = 'map'
         FloatLayout:
             BoxLayout
                 orientation: 'horizontal'
