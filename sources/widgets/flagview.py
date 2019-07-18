@@ -5,19 +5,22 @@ from kivy.properties import ListProperty, NumericProperty, StringProperty, Boole
 
 from math import sin, cos, pi
 
+
 flagview_layout = '''
 <FlagView>:
     name: ''
     text: ''
     description: ''
     value: False
-    
+
     RoundedBox:
         size: root.size
         pos: root.pos
         corners: 20, 20, 20, 20
         padding: 10
         line_width: 3
+        fill_color: 0,1,0,0.5 if root.value == True else 1,0,0,1
+
     BoxLayout:
         orientation: 'vertical'
         Label:
@@ -34,11 +37,15 @@ flagview_layout = '''
     on_resolution: self.compute_points()
     canvas:
         Color:
-            rgba: 0,1,0,0.5
-        Mesh:
-            mode: 'triangle_fan'
-            vertices: self.vertices
-            indices: self.indices
+            rgba: self.fill_color
+        RoundedRectangle:
+            pos: self.x + self.padding, self.y + self.padding
+            size: self.size[0] - 2*self.padding, self.size[1] - 2*self.padding
+            radius: self.corners
+        # Mesh:
+        #     mode: 'triangle_fan'
+        #     vertices: self.vertices
+        #     indices: self.indices
         Color:
             None    
         Line:
@@ -63,6 +70,12 @@ class FlagView(AnchorLayout):
     def __init__(self, **kwargs):
         super(FlagView, self).__init__(**kwargs)
 
+    def set_high(self):
+        self.value = True
+
+    def set_low(self):
+        self.value = False
+
 
 class RoundedBox(Widget):
     corners = ListProperty([0, 0, 0, 0])
@@ -70,8 +83,7 @@ class RoundedBox(Widget):
     resolution = NumericProperty(50)
     points = ListProperty([])
     padding = NumericProperty(0)
-    vertices = ListProperty([])
-    indices = ListProperty([])
+    fill_color = ListProperty([0,0,0,0])
 
     def compute_points(self, *args):
         self.points = []
@@ -118,16 +130,7 @@ class RoundedBox(Widget):
 
         self.points.extend(self.points[:2])
 
-        i = 0
-        while i < len(self.points)-1:
-            point_x = self.points[i]
-            point_y = self.points[i+1]
-            self.vertices.extend([self.x + point_x, self.y + point_y, 0, 0])
-            self.indices.append(i/2)
-            i = i + 2
-            pass
-        pass
-        print self.pos
+        print self.fill_color
 
 
 Builder.load_string(flagview_layout)

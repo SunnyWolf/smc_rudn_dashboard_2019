@@ -26,8 +26,15 @@ class FlagsScreen(Screen):
     def __init__(self, **kw):
         super(FlagsScreen, self).__init__(**kw)
 
+        self.groups = []
+
         for j in range(3):
+            group = []
             self.ids.grid.add_widget(Label(text='CNT_FLAGS' + str(j), font_size=20))
             for i in range(8):
-                self.ids.grid.add_widget(FlagView(name=str(i), text="DESCRIPTION"))
+                flag = FlagView(name=str(i), text='DESCRIPTION')
+                group.append(flag)
+                self.ids.grid.add_widget(flag)
+                # self.ids.grid.add_widget(FlagView(name=str(i), text="DESCRIPTION"))
                 # self.ids.grid.add_widget(RoundedBox(corners=[20, 20, 20, 20], padding=10, line_width=5))
+            self.groups.append(group)
