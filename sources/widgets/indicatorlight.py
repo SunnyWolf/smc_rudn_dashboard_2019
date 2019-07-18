@@ -1,7 +1,5 @@
 from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
-from threading import Timer
-
 from kivy.properties import NumericProperty
 
 indicatorlight_layout = '''

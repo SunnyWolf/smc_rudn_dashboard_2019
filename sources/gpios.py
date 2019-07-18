@@ -1,7 +1,7 @@
 from gpiozero import Button
 from gpiozero import PWMOutputDevice
 
-from widgets.indicatorlight import IndicatorLight
+from sources.widgets.indicatorlight import IndicatorLight
 
 
 class Gpios:
