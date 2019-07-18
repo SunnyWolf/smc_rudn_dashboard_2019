@@ -1,5 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
+from kivy.garden.mapview import MapView
+
 
 mapscreen_layout = '''
 <MapScreen>:
@@ -11,6 +13,10 @@ mapscreen_layout = '''
             font_size: 30
             text: 'DASHBOARD'
             on_release: app.root.current = 'main'
+        MapView:
+            zoom: 11
+            lat: 41.587131
+            lon: 1.681819
 '''
 
 
