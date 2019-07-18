@@ -130,7 +130,5 @@ class RoundedBox(Widget):
 
         self.points.extend(self.points[:2])
 
-        print self.fill_color
-
 
 Builder.load_string(flagview_layout)
