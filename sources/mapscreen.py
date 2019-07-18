@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.garden.mapview import MapView
+from kivy.garden.mapview import MapView, MapMarker
 
 
 mapscreen_layout = '''
@@ -17,6 +17,9 @@ mapscreen_layout = '''
             zoom: 11
             lat: 41.587131
             lon: 1.681819
+            MapMarker:
+                lat: 41.587131
+                lon: 1.681819
 '''
 
 
